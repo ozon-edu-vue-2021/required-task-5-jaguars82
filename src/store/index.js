@@ -18,7 +18,11 @@ export default new Vuex.Store({
         state.productsInCart[payload.id].amount += payload.amount;
         state.productsInCart[payload.id].positionSummary += payload.positionSummary;
       } else {
-        Vue.set(state.productsInCart, payload.id, { amount: payload.amount, positionSummary: payload.positionSummary });
+        const positionData = {
+          amount: payload.amount,
+          positionSummary: payload.positionSummary
+        };
+        Vue.set(state.productsInCart, payload.id, positionData);
       }
     },
     deleteFromCart(state, payload) {
@@ -36,7 +40,7 @@ export default new Vuex.Store({
     },
     toggleFavourites(state, payload) {
       const prodIndex = state.products.findIndex(product => product.id == payload.id);
-      state.products[prodIndex].favorite = payload.status;
+      state.products[prodIndex].favorite = !payload.status;
     }
   },
   actions: {

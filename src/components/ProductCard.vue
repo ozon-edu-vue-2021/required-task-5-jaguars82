@@ -116,7 +116,12 @@ export default {
       if(this.amount > 1) this.amount -= 1;
     },
     addToCart() {
-      this.$store.dispatch('addToCart', { id: this.product.id, amount: this.amount, positionSummary: this.product.price * this.amount });
+      const positionData = {
+        id: this.product.id,
+        amount: this.amount,
+        positionSummary: this.product.price * this.amount
+      };
+      this.$store.dispatch('addToCart', positionData);
       this.amount = 1;
     }
   }

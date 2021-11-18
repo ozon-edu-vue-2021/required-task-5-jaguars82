@@ -58,12 +58,14 @@ export default {
   },
   methods: {
     order() {
-      let list = 'СПИСОК ТОВАРОВ:\n';
-      this.productsInCart.forEach(product => {
-        list += `- ${product.dish} x ${product.amount} = ${product.positionSummary} руб.\n`;
+      const list = this.productsInCart.map(product => {
+        return `- ${product.dish} x ${product.amount} = ${product.positionSummary} руб.\n`;
       });
-      list += `\nСУММА ЗАКАЗА: ${this.$store.getters.cartSummary.totalSumm} РУБЛЕЙ`;
-      alert(list);
+      
+      list.unshift('СПИСОК ТОВАРОВ:\n');
+      list.push(`\nСУММА ЗАКАЗА: ${this.$store.getters.cartSummary.totalSumm} РУБЛЕЙ`);
+      
+      alert(list.join(''));
     }
   }
 }

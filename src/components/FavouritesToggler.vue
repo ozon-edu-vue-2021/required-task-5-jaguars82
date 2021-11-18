@@ -4,7 +4,7 @@
       class="toggle-button"
       @click="toggleFavourites"
     >
-      <heart-icon v-if="isFavorite" />
+      <heart-icon v-if="favoriteStatus" />
       <heart-outline-icon v-else />
     </button>
   </div>
@@ -29,15 +29,13 @@ export default {
       default: false
     }
   },
-  data() {
-    return {
-      isFavorite: this.favoriteStatus
-    }
-  },
   methods: {
     toggleFavourites() {
-      this.isFavorite = !this.isFavorite;
-      this.$store.dispatch('toggleFavourites', { id:this.productId, status: this.isFavorite });
+      const productData = {
+        id: this.productId,
+        status: this.favoriteStatus
+      };
+      this.$store.dispatch('toggleFavourites', productData);
     }
   }
 }
